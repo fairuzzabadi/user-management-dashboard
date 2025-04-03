@@ -1,3 +1,7 @@
+# PROJECT IS LIVE with Netlify
+
+url: https://usr-management-dashboard.netlify.app/
+
 # UserManagementDashboard
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
