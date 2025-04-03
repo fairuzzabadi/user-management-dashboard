@@ -3,6 +3,12 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./src",  // Define root folder for resolving modules
+    "paths": {
+      "@app/*": ["app/*"],  // Define custom path alias
+      "@pages/*": ["app/pages/*"],  // Define path for pages
+      "@components/*": ["app/components/*"],  // Define path for components
+    },
     "outDir": "./out-tsc/app",
     "types": []
   },

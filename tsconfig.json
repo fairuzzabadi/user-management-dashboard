@@ -3,6 +3,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./src",  // Define root folder for resolving modules
+    "paths": {
+      "@app/*": ["app/*"],  // Define custom path alias
+      "@pages/*": ["app/pages/*"],  // Define path for pages
+      "@components/*": ["app/components/*"],  // Define path for components
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

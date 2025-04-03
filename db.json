@@ -1,0 +1,13 @@
+{
+  "userDetail": {
+    "username": "username",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email",
+    "birthDate": 1743620858107,
+    "basicSalary":  20000000,
+    "status": "status",
+    "group": "group",
+    "description": "description"
+  }
+}

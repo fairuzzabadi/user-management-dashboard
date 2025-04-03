@@ -1,0 +1,152 @@
+<app-header></app-header>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="mx-auto max-w-7xl py-6 px-2 sm:px-6 lg:px-8">
+  <div class="space-y-12">
+  
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base/7 font-semibold text-gray-900">Employee profile</h2>
+      <p class="mt-1 text-sm/6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="col-span-full">
+          <label for="username" class="block text-sm/6 font-medium text-gray-900">Username</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="text" matInput formControlName="username">
+              @if (userForm.get('username')!.hasError('required')) {
+                <mat-error>Username name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="first-name" class="block text-sm/6 font-medium text-gray-900">First name</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="text" matInput formControlName="firstName">
+              @if (userForm.get('firstName')!.hasError('required')) {
+                <mat-error>First name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Last name</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="text" matInput formControlName="lastName">
+              @if (userForm.get('lastName')!.hasError('required')) {
+                <mat-error>Last name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-span-full">
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="email" matInput formControlName="email" placeholder="Ex. mail@example.com">
+              @if (userForm.get('email')!.hasError('email') && !userForm.get('email')!.hasError('required')) {
+                <mat-error>Please enter a valid email address</mat-error>
+              }
+              @if (userForm.get('email')!.hasError('required')) {
+                <mat-error>Email is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Basic salary</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="number" matInput formControlName="basicSalary" placeholder="Ex. 20000000">
+              @if (userForm.get('basicSalary')!.hasError('pattern') && !userForm.get('basicSalary')!.hasError('required')) {
+                <mat-error>Please enter a valid number</mat-error>
+              }
+              @if (userForm.get('basicSalary')!.hasError('required')) {
+                <mat-error>Basic salary is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Status</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <input type="text" matInput formControlName="status">
+              @if (userForm.get('status')!.hasError('required')) {
+                <mat-error>Status is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Birth date</label>
+          <div class="mt-2">
+            <mat-form-field class=" block w-full">
+              <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthDate" placeholder="MM/DD/YYYY" >
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if (userForm.get('birthDate')!.hasError('required')) {
+                <mat-error>Birth date is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="country" class="block text-sm/6 font-medium text-gray-900">Group</label>
+
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <mat-select formControlName="group" placeholder="Group" #singleSelect>
+                <mat-option class="!bg-neutral-50">
+                  <ngx-mat-select-search 
+                    [(ngModel)]="searchInput"
+                    [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="triggerSearchInput()"
+                    placeholderLabel="Search.." 
+                    noEntriesFoundLabel="'No data found'">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let list of groupLists" [value]="list.id" [ngClass]="{'is-hidden': list.isHidden}">
+                  {{list.name}}
+                </mat-option>
+              </mat-select>
+              @if (userForm.get('group')!.hasError('required')) {
+                <mat-error>Group is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-span-full">
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">Description</label>
+          <div class="mt-2">
+            <mat-form-field class="block w-full">
+              <textarea matInput formControlName="description"></textarea>
+              @if (userForm.get('description')!.hasError('required')) {
+                <mat-error>Description is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button [routerLink]="['/user-management/list']" type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+  </div>
+</form>

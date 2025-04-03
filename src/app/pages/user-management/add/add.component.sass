@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root 
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-text-color: orange,
+    calendar-date-selected-state-background-color: red,
+  ))
+
+.is-hidden
+  display: none !important
